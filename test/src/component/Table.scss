@@ -1,0 +1,16 @@
+.table{
+    background-color: rgb(215, 241, 243); 
+}
+
+.table .MuiDataGrid-columnHeaderTitle {
+    font-weight: bold; /* Example additional style */
+  }
+
+.MuiDataGrid-toolbarContainer {
+    flex-direction: row-reverse;
+    background-color: rgb(252, 231, 212);
+}
+
+.MuiDataGrid-footerContainer {
+    background-color: peachpuff;
+}

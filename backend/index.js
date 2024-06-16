@@ -55,6 +55,40 @@ app.post("/books", (req, res) => {
     })
 })
 
+//Delete book from database
+app.delete('/books/:id', (req, res) => {
+    const bookId = req.params.id
+    const q = "DELETE FROM goodreads WHERE ID = ?"
+
+    db.query(q, [bookId], (err, data) => {
+        if(err) return res.json(err)
+            return res.json("Book has been exterminated lol")
+    })
+})
+
+
+//Update book from database
+app.put('/books/:id', (req, res) => {
+    const bookId = req.params.id
+    const q = "UPDATE goodreads SET `Title`=?, `Author`=?, `Fiction`=?, `Genre`=?, `Gender`=?, `Origin`=?, `Language`=?, `Pages`=?, `Year Published`=? WHERE id = ?"
+
+    const values = [
+        req.body.Title,
+        req.body.Author,
+        req.body.Fiction,
+        req.body.Genre,
+        req.body.Gender,
+        req.body.Origin,
+        req.body.Language,
+        req.body.Pages,
+        req.body.YearPublished
+    ]
+
+    db.query(q, [...values, bookId], (err, data) => {
+        if (err) return res.json(err)
+        return res.json("Book has been updated")
+    })
+})
 
 
 app.listen(3000, ()=> {

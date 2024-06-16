@@ -3,6 +3,7 @@ import Navbar from '../component/Navbar'
 import Table from '../component/Table'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import './Books.scss'
 
 //Fetch data from mysql DB
 const Books = () => {
@@ -24,8 +25,7 @@ const Books = () => {
 
   return ( <>
     <Navbar />
-     <div>Books</div>
-     <button>Add new book</button>
+     <button className="BookBtn">Add new book</button>
 
     <Table books={books} />
   </>)

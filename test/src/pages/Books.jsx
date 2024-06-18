@@ -4,11 +4,20 @@ import Table from '../component/Table'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './Books.scss'
+// import Create from '../component/Create'
+// import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom'
+import Create from "../component/Create"
+
 
 //Fetch data from mysql DB
 const Books = () => {
 
   const [books, setBooks] = useState([])
+  
+  //state to control the modal visibility
+  const[showCreateForm, setShowCreateForm] = useState(false)
+
 
   useEffect(() => {
     const fetchAllBooks = async() => {
@@ -23,11 +32,25 @@ const Books = () => {
     fetchAllBooks()
   }, [])
 
+  //Create new book 
+  const addBook = (newBook) => {
+    setBooks((prevBooks) => [...prevBooks, newBook])
+  }
+ 
+
   return ( <>
     <Navbar />
-     <button className="BookBtn">Add new book</button>
-
+     <button onClick={() => setShowCreateForm(true)}>
+      Add New Book
+     </button>
+    
     <Table books={books} />
+    {showCreateForm && (
+      <Create 
+        onClose={()=> setShowCreateForm(false)}
+        onAddBook = {addBook}
+      />
+    )}
   </>)
 }
 

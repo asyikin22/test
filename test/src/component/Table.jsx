@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { IconButton } from '@mui/material';
 import './Table.scss'
 
-const Table = ({ books }) => {
-  // console.log('Books in Table Component:', books)
+
+const Table = ({ books}) => {
+
 
     const columns = [ 
         { field: 'ID', headerName: 'ID', width: 90 },
@@ -70,6 +74,31 @@ const Table = ({ books }) => {
         flex: 1,
         minWidth: 100,
         },
+        {
+          field: "Actions",
+          headerName: "Actions",
+          flex: 1, 
+          minWidth: 100,
+          renderCell: (params) => (
+            <>
+              <IconButton 
+                color="primary"
+                onClick={()=> handleEditClick(params.id)}
+              >
+                <EditIcon />
+              
+              </IconButton>
+
+              <IconButton 
+                color="secondary"
+                onClick={()=> handleDeleteClick(params.id)}
+              >
+                <DeleteOutlineIcon />
+              
+              </IconButton>
+            </>
+          )
+        }
       ];
 
   return (

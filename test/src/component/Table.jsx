@@ -5,9 +5,11 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { IconButton } from '@mui/material';
 import './Table.scss'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const Table = ({ books}) => {
 
+  //function to delete book
   async function handleDeleteClick(id) {
     try {
       await axios.delete("http://localhost:3000/books/" + id)
@@ -18,6 +20,13 @@ const Table = ({ books}) => {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  //function to navigate to the update page with the book ID
+  const navigate = useNavigate()
+  
+  async function handleEditClick(id) {
+    navigate(`/update/${id}`)
   }
 
     const columns = [ 

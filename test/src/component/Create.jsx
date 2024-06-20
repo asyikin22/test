@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Create.scss'
 import { useNavigate, Link } from 'react-router-dom';
 
-const Create = ({ addBook }) => {
+const Create = () => {
 
 const [book, setBook] = useState({
     title: "",
@@ -24,14 +24,13 @@ function handleChange(event) {
 }
 
 async function handleClick(event) {
-  event.preventDefault();
-  const bookData = {
-    ...book,
-    pages: book.pages ? parseInt(book.pages, 10) : null,
-    YearPublished: book.YearPublished ? parseInt(book.YearPublished, 10) : null,
-  };
-  await addBook(bookData);
-  navigate("/");
+  event.preventDefault()
+  try {
+    await axios.post("http://localhost:3000/books/", book)
+    navigate("/")
+  } catch (error) {
+    console.log(error)
+  }
 }
 
   return (

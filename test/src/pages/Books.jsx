@@ -5,10 +5,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './Books.scss'
 import { Link } from 'react-router-dom'
-import Create from "../component/Create"
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-
 
 //Fetch data from mysql DB
 const Books = () => {
@@ -27,19 +23,7 @@ const Books = () => {
     }
     fetchAllBooks()
   }, [])
-
-  const addBook = async (newBook) => {
-    try {
-      const response = await axios.post('http://localhost:3000/books', newBook);
-      if (response.status === 200) {
-        fetchAllBooksBooks(); // Refresh the book list
-      }
-    } catch (error) {
-      console.error('Error adding book:', error);
-    }
-  };
  
-
   return ( <>
     <Navbar />
      <button>

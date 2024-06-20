@@ -4,10 +4,21 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { IconButton } from '@mui/material';
 import './Table.scss'
-
+import axios from 'axios'
 
 const Table = ({ books}) => {
 
+  async function handleDeleteClick(id) {
+    try {
+      await axios.delete("http://localhost:3000/books/" + id)
+      console.log("book is susccesfully deleted!")
+      setTimeout(() => {
+        window.location.reload()
+      }, 500)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
     const columns = [ 
         { field: 'ID', headerName: 'ID', width: 90 },
@@ -82,6 +93,7 @@ const Table = ({ books}) => {
           renderCell: (params) => (
             <>
               <IconButton 
+                style={{ marginRight: '10px' }}
                 color="primary"
                 onClick={()=> handleEditClick(params.id)}
               >

@@ -35,7 +35,7 @@ app.get("/books", (req, res) => {
 })
 
 //Add new book to DB
-app.post("/books", (req, res) => {
+app.post("/books", async (req, res) => {
     const q = "INSERT INTO goodreads(`Title`, `Author`, `Fiction`, `Genre`, `Gender`, `Origin`, `Language`, `Pages`, `Year Published`) VALUES (?,?,?,?,?,?,?,?,?)"
     const values = [
         req.body.Title,
@@ -49,9 +49,9 @@ app.post("/books", (req, res) => {
         req.body.YearPublished
     ]
 
-    db.query(q, values, (err, data) => {
-        if(err) return res.json(err)
-            return res.json("New book added!")
+    db.query (q, values, (err, data) => {
+        if (err) return res.json(err)
+        return res.json("Book has been added!")
     })
 })
 
